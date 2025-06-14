@@ -21,16 +21,14 @@ const formData = reactive({
   type: '',
   frekvens: '',
   tidspunkt: '',
-  opgaver: [],
-  tjeklisteFields: []
+  opgaver: []
 })
 
 const detailItem = computed(() => ({
   tjeklisteNavn: formData.navn || 'Ny tjekliste',
   beskrivelse: formData.beskrivelse || 'Ingen beskrivelse angivet',
   type: formData.type || 'Type ikke angivet',
-  frekvens: formData.frekvens || 'Frekvens ikke angivet',
-  tjeklisteFields: formData.tjeklisteFields || []
+  frekvens: formData.frekvens || 'Frekvens ikke angivet'
 }))
 
 const context = 'tjeklister'
@@ -52,14 +50,13 @@ const handleComplete = async () => {
       beskrivelse: formData.beskrivelse,
       type: formData.type,
       frekvens: formData.frekvens,
-      tjeklisteFields: formData.tjeklisteFields || [],
-      opgaver: formData.opgaver || []
+      tidspunkt: formData.tidspunkt,
+      opgaver: formData.opgaver
     }
 
     await tjeklisteStore.addTjekliste(nyTjekliste)
     router.push('/tjeklister')
   } catch (error) {
-    console.error('Fejl ved oprettelse:', error)
     alert('Der opstod en fejl under oprettelsen af tjeklisten: ' + error.message)
   }
 }
